@@ -45,6 +45,7 @@ data Forecast = Forecast
   }
   deriving (Eq, Show, Generic, FromJSON)
 
+-- https://hackage.haskell.org/package/optparse-applicative-0.18.1.0#introduction
 main :: IO ()
 main = do
   forecast <- fetchForecast
