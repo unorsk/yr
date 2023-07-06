@@ -23,6 +23,7 @@ instance Show WeatherSymbol where
   show (WeatherSymbol "partlycloudy_night") = "\x1001DA"
   show (WeatherSymbol "cloudy") = "\x1001C2"
   show (WeatherSymbol "clearsky_day") = "\x1001AD"
+  show (WeatherSymbol "clearsky_night") = "\x1001C0"
   show (WeatherSymbol "fair_night") = "\x1001B9"
   show (WeatherSymbol "rainshowers_day") = "\x1001C8"
   show (WeatherSymbol "rainshowers_night") = "\x1001DC"
@@ -54,7 +55,7 @@ main = do
     Right f ->
       let dayLines = map (\i -> catMaybes i.sixHourSymbols) f.dayIntervals in
         traverse_ (\(line::[WeatherSymbol]) -> do
-          let strLine = map (\l -> " " <> show l <> " ") line in
+          let strLine = map (\l -> "  " <> show l <> " ") line in
             putStrLn $ concat strLine
           ) dayLines
 
