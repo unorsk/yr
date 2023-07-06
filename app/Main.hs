@@ -46,6 +46,9 @@ data Forecast = Forecast
   }
   deriving (Eq, Show, Generic, FromJSON)
 
+-- Looking up unicode symbols here:
+-- https://www.cogsci.ed.ac.uk/~richard/utf-8.cgi?input=%F4%80%87%80&mode=char
+--
 -- https://hackage.haskell.org/package/optparse-applicative-0.18.1.0#introduction
 main :: IO ()
 main = do
