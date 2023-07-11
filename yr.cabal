@@ -59,8 +59,12 @@ executable yr
 
     -- .hs or .lhs file containing the Main module.
     main-is:          Main.hs
+    other-modules:    WeatherModel
     default-extensions: OverloadedStrings
                         OverloadedRecordDot
+                        DuplicateRecordFields
+                        DeriveGeneric
+                        DeriveAnyClass
     -- Modules included in this executable, other than Main.
     -- other-modules:
 

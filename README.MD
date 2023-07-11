@@ -8,8 +8,12 @@
 
 It works best if your console font supports weather symbols like these:  􀆭  􀇆  􀇔
 
-## Instalation (building from source)
+## Installation (building from source)
 
 ```
 cabal install yr
+```
+or if you rebuilding it
+```
+cabal install yr --overwrite-policy=always
 ```
