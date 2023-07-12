@@ -3,7 +3,7 @@ module WeatherModel (WeatherSymbol(..), Precipitation(..), SymbolCode(..), Tempe
 import Data.Aeson (FromJSON)
 import GHC.Generics (Generic)
 import Data.Time (UTCTime)
-import Data.Maybe (fromMaybe)
+import Data.Maybe (fromMaybe, isNothing)
 
 data WeatherSymbol where
   WeatherSymbol :: String -> WeatherSymbol
@@ -31,14 +31,14 @@ instance Show WeatherSymbol where
 data Precipitation = Precipitation
   {
     value :: Float
-    , max :: Float
-    , min :: Float
-    , probability :: Int
+    , max :: Maybe Float
+    , min :: Maybe Float
+    , probability :: Maybe Int
   }
   deriving (Eq, Generic, FromJSON)
 
 instance Show Precipitation where
-  show (Precipitation vvalue _max _min probability) = show probability <> "% " <> show vvalue <> "mm "
+  show (Precipitation vvalue _max _min probability) = (if isNothing probability then "" else show probability <> "% ") <> show vvalue <> "mm "
 
 data SymbolCode = SymbolCode
   {
