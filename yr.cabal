@@ -1,4 +1,5 @@
-cabal-version:      3.0
+cabal-version:   3.0
+
 -- The cabal-version field refers to the version of the .cabal specification,
 -- and can be different from the cabal-install (the tool) version and the
 -- Cabal (the library) version you are using. As such, the Cabal (the library)
@@ -11,7 +12,7 @@ cabal-version:      3.0
 --   http://haskell.org/cabal/users-guide/
 --
 -- The name of the package.
-name:               yr
+name:            yr
 
 -- The package version.
 -- See the Haskell package versioning policy (PVP) for standards
@@ -20,7 +21,7 @@ name:               yr
 -- PVP summary:     +-+------- breaking API changes
 --                  | | +----- non-breaking API additions
 --                  | | | +--- code changes with no API change
-version:            0.1.0.0
+version:         0.1.0.0
 
 -- A short (one-line) description of the package.
 -- synopsis:
@@ -29,53 +30,61 @@ version:            0.1.0.0
 -- description:
 
 -- The license under which the package is released.
-license:            MIT
+license:         MIT
 
 -- The file containing the license text.
-license-file:       LICENSE
+license-file:    LICENSE
 
 -- The package author(s).
-author:             andrii
+author:          andrii
 
 -- An email address to which users can send suggestions, bug reports, and patches.
-maintainer:         25188+unorsk@users.noreply.github.com
+maintainer:      25188+unorsk@users.noreply.github.com
 
 -- A copyright notice.
 -- copyright:
-build-type:         Simple
+build-type:      Simple
 
 -- Extra doc files to be distributed with the package, such as a CHANGELOG or a README.
-extra-doc-files:    CHANGELOG.md
+extra-doc-files: CHANGELOG.md
 
 -- Extra source files to be distributed with the package, such as examples, or a tutorial module.
 -- extra-source-files:
 
 common warnings
-    ghc-options: -Wall
+  ghc-options: -Wall
 
 executable yr
-    -- Import common warning flags.
-    import:           warnings
+  -- Import common warning flags.
+  import:             warnings
 
-    -- .hs or .lhs file containing the Main module.
-    main-is:          Main.hs
-    other-modules:    WeatherModel
-    default-extensions: OverloadedStrings
-                        OverloadedRecordDot
-                        DuplicateRecordFields
-                        DeriveGeneric
-                        DeriveAnyClass
-    -- Modules included in this executable, other than Main.
-    -- other-modules:
+  -- .hs or .lhs file containing the Main module.
+  main-is:            Main.hs
+  other-modules:      WeatherModel
+  default-extensions:
+    DeriveAnyClass
+    DeriveGeneric
+    DuplicateRecordFields
+    OverloadedRecordDot
+    OverloadedStrings
 
-    -- LANGUAGE extensions used by modules in this package.
-    -- other-extensions:
+  -- Modules included in this executable, other than Main.
+  -- other-modules:
 
-    -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.17.0.0, http-conduit, aeson, time, bytestring, optparse-applicative
+  -- LANGUAGE extensions used by modules in this package.
+  -- other-extensions:
 
-    -- Directories containing source files.
-    hs-source-dirs:   app
+  -- Other library packages from which modules are imported.
+  build-depends:
+    , aeson
+    , base                  ^>=4.17.0.0
+    , bytestring
+    , http-conduit
+    , optparse-applicative
+    , time
 
-    -- Base language which the package is written in.
-    default-language: GHC2021
+  -- Directories containing source files.
+  hs-source-dirs:     app
+
+  -- Base language which the package is written in.
+  default-language:   GHC2021
