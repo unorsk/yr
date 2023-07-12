@@ -1,9 +1,17 @@
-module WeatherModel (WeatherSymbol(..), Precipitation(..), SymbolCode(..), Temperature(..), DayInterval(..), ShortInterval(..), Forecast(..)) where
+module WeatherModel
+  ( WeatherSymbol (..)
+  , Precipitation (..)
+  , SymbolCode (..)
+  , Temperature (..)
+  , DayInterval (..)
+  , ShortInterval (..)
+  , Forecast (..)
+  ) where
 
 import Data.Aeson (FromJSON)
-import GHC.Generics (Generic)
-import Data.Time (UTCTime)
 import Data.Maybe (fromMaybe, isNothing)
+import Data.Time (UTCTime)
+import GHC.Generics (Generic)
 
 data WeatherSymbol where
   WeatherSymbol :: String -> WeatherSymbol
@@ -27,24 +35,24 @@ instance Show WeatherSymbol where
   show (WeatherSymbol "lightrainshowersandthunder_day") = "\x1001D8"
   show (WeatherSymbol r) = r
 
-
 data Precipitation = Precipitation
-  {
-    value :: Float
-    , max :: Maybe Float
-    , min :: Maybe Float
-    , probability :: Maybe Int
+  { value :: Float
+  , max :: Maybe Float
+  , min :: Maybe Float
+  , probability :: Maybe Int
   }
   deriving (Eq, Generic, FromJSON)
 
 instance Show Precipitation where
-  show (Precipitation vvalue _max _min probability) = (if isNothing probability then "" else show probability <> "% ") <> show vvalue <> "mm "
+  show (Precipitation vvalue _max _min probability) =
+    (if isNothing probability then "" else show probability <> "% ")
+      <> show vvalue
+      <> "mm "
 
 data SymbolCode = SymbolCode
-  {
-      next1Hour :: Maybe WeatherSymbol
-    , next6Hours :: Maybe WeatherSymbol
-    , next12Hours :: Maybe WeatherSymbol
+  { next1Hour :: Maybe WeatherSymbol
+  , next6Hours :: Maybe WeatherSymbol
+  , next12Hours :: Maybe WeatherSymbol
   }
   deriving (Eq, Generic, FromJSON)
 
@@ -52,22 +60,29 @@ printMaybeWeather :: Maybe WeatherSymbol -> String
 printMaybeWeather = maybe " " show
 
 instance Show SymbolCode where
-  show (SymbolCode next1Hour next6Hours next12Hours) = printMaybeWeather next1Hour <> "  " <> printMaybeWeather next6Hours <> "  " <> printMaybeWeather next12Hours
+  show (SymbolCode next1Hour next6Hours next12Hours) =
+    printMaybeWeather next1Hour
+      <> "  "
+      <> printMaybeWeather next6Hours
+      <> "  "
+      <> printMaybeWeather next12Hours
 
 data Temperature = Temperature
-  {
-    value :: Float
-    , max :: Maybe Float
-    , min ::  Maybe Float
+  { value :: Float
+  , max :: Maybe Float
+  , min :: Maybe Float
   }
   deriving (Eq, Generic, FromJSON)
 
 instance Show Temperature where
-  show (Temperature _value mmax mmin) = show (fromMaybe 0.0 mmin::Float) <> "Cº " <> show (fromMaybe 0.0 mmax) <> "Cº "
+  show (Temperature _value mmax mmin) =
+    show (fromMaybe 0.0 mmin :: Float)
+      <> "Cº "
+      <> show (fromMaybe 0.0 mmax)
+      <> "Cº "
 
 data DayInterval = DayInterval
-  {
-    sixHourSymbols :: [Maybe WeatherSymbol]
+  { sixHourSymbols :: [Maybe WeatherSymbol]
   , temperature :: Temperature
   , start :: UTCTime
   , end :: UTCTime
@@ -75,8 +90,7 @@ data DayInterval = DayInterval
   deriving (Eq, Show, Generic, FromJSON)
 
 data ShortInterval = ShortInterval
-  {
-    symbolCode :: SymbolCode
+  { symbolCode :: SymbolCode
   , temperature :: Temperature
   , precipitation :: Precipitation
   , start :: UTCTime
@@ -85,9 +99,8 @@ data ShortInterval = ShortInterval
   deriving (Eq, Show, Generic, FromJSON)
 
 data Forecast = Forecast
-  {
-    created :: UTCTime
-    , dayIntervals :: [DayInterval]
-    , shortIntervals :: [ShortInterval]
+  { created :: UTCTime
+  , dayIntervals :: [DayInterval]
+  , shortIntervals :: [ShortInterval]
   }
   deriving (Eq, Show, Generic, FromJSON)
