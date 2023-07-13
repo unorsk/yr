@@ -31,6 +31,7 @@ instance Show WeatherSymbol where
   show (WeatherSymbol "clearsky_night") = "\x1001C0"
   show (WeatherSymbol "fair_night") = "\x1001B9"
   show (WeatherSymbol "rainshowers_day") = "\x1001C8"
+  show (WeatherSymbol "heavyrainshowers_day") = "\x1001C8"
   show (WeatherSymbol "rainshowers_night") = "\x1001DC"
   show (WeatherSymbol "heavyrainshowersandthunder_day") = "\x1001DE"
   show (WeatherSymbol "rainshowersandthunder_day") = "\x1001DE"
