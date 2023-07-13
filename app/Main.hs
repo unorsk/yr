@@ -26,8 +26,6 @@ data CommandLineArgs = CommandLineArgs
   , extended :: Extended
   }
 
--- Looking up unicode symbols here:
--- https://www.cogsci.ed.ac.uk/~richard/utf-8.cgi?input=%F4%80%87%80&mode=char
 main :: IO ()
 main =
   doForecast

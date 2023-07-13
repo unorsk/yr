@@ -9,7 +9,7 @@ module WeatherModel
   ) where
 
 import Data.Aeson (FromJSON)
-import Data.Maybe (fromMaybe, isNothing)
+import Data.Maybe (fromMaybe)
 import Data.Time (UTCTime)
 import GHC.Generics (Generic)
 
@@ -17,6 +17,8 @@ data WeatherSymbol where
   WeatherSymbol :: String -> WeatherSymbol
   deriving (Eq, Generic, FromJSON)
 
+-- Looking up unicode symbols here:
+-- https://www.cogsci.ed.ac.uk/~richard/utf-8.cgi?input=%F4%80%87%80&mode=char
 instance Show WeatherSymbol where
   show (WeatherSymbol []) = "idk"
   show (WeatherSymbol "rainandthunder") = "\x1001DE"
@@ -30,6 +32,8 @@ instance Show WeatherSymbol where
   show (WeatherSymbol "fair_night") = "\x1001B9"
   show (WeatherSymbol "rainshowers_day") = "\x1001C8"
   show (WeatherSymbol "rainshowers_night") = "\x1001DC"
+  show (WeatherSymbol "heavyrainshowersandthunder_day") = "\x1001DE"
+  show (WeatherSymbol "rainshowersandthunder_day") = "\x1001DE"
   show (WeatherSymbol "heavyrain") = "\x1001C8"
   show (WeatherSymbol "lightrain") = "\x1001C4"
   show (WeatherSymbol "lightrainshowersandthunder_day") = "\x1001D8"
