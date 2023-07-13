@@ -45,7 +45,10 @@ data Precipitation = Precipitation
 
 instance Show Precipitation where
   show (Precipitation vvalue _max _min probability) =
-    (if isNothing probability then "" else show probability <> "% ")
+    ( case probability of
+        Nothing -> ""
+        Just p -> show p <> "% "
+    )
       <> show vvalue
       <> "mm "
 
